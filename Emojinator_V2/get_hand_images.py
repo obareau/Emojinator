@@ -18,7 +18,7 @@ def main():
         ret, frame = cap.read()
         frame = cv2.flip(frame, 1)
         #frame = cv2.resize(frame, (image_x, image_y))
-        cv2.imwrite("hand_images/" + str(pic_no) + ".jpg", frame)
+        cv2.imwrite(f"hand_images/{str(pic_no)}.jpg", frame)
         cv2.imshow("Capturing gesture", frame)
         pic_no += 1
         if pic_no == total_pics:

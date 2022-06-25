@@ -21,15 +21,18 @@ def xml_to_csv(path):
                      )
             xml_list.append(value)
     column_name = ['filename', 'width', 'height', 'class', 'xmin', 'ymin', 'xmax', 'ymax']
-    xml_df = pd.DataFrame(xml_list, columns=column_name)
-    return xml_df
+    return pd.DataFrame(xml_list, columns=column_name)
 
 
 def main():
-    for directory in['train','test']:
-        image_path = os.path.join(os.getcwd(), 'hand_images/{}'.format(directory))
+    for directory in ['train','test']:
+        image_path = os.path.join(os.getcwd(), f'hand_images/{directory}')
         xml_df = xml_to_csv(image_path)
-        xml_df.to_csv('F:\projects\HandDetection\data\{}_labels.csv'.format(directory), index=None)
+        xml_df.to_csv(
+            f'F:\projects\HandDetection\data\{directory}_labels.csv',
+            index=None,
+        )
+
         print('Successfully converted xml to csv.')
 
 

@@ -49,10 +49,7 @@ def create_category_index(categories):
       category_index: a dict containing the same entries as categories, but keyed
         by the 'id' field of each category.
     """
-    category_index = {}
-    for cat in categories:
-        category_index[cat['id']] = cat
-    return category_index
+    return {cat['id']: cat for cat in categories}
 
 
 def convert_label_map_to_categories(label_map,
@@ -84,11 +81,14 @@ def convert_label_map_to_categories(label_map,
     list_of_ids_already_added = []
     if not label_map:
         label_id_offset = 1
-        for class_id in range(max_num_classes):
-            categories.append({
+        categories.extend(
+            {
                 'id': class_id + label_id_offset,
-                'name': 'category_{}'.format(class_id + label_id_offset)
-            })
+                'name': f'category_{class_id + label_id_offset}',
+            }
+            for class_id in range(max_num_classes)
+        )
+
         return categories
     for item in label_map.item:
         if not 0 < item.id <= max_num_classes:
@@ -134,7 +134,4 @@ def get_label_map_dict(label_map_path):
       A dictionary mapping label names to id.
     """
     label_map = load_labelmap(label_map_path)
-    label_map_dict = {}
-    for item in label_map.item:
-        label_map_dict[item.name] = item.id
-    return label_map_dict
+    return {item.name: item.id for item in label_map.item}
