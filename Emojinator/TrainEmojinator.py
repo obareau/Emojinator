@@ -49,12 +49,12 @@ def main():
     Y_test = Y[12000:13201, :]
     Y_test = Y_test.T
 
-    print("number of training examples = " + str(X_train.shape[0]))
-    print("number of test examples = " + str(X_test.shape[0]))
-    print("X_train shape: " + str(X_train.shape))
-    print("Y_train shape: " + str(Y_train.shape))
-    print("X_test shape: " + str(X_test.shape))
-    print("Y_test shape: " + str(Y_test.shape))
+    print(f"number of training examples = {str(X_train.shape[0])}")
+    print(f"number of test examples = {str(X_test.shape[0])}")
+    print(f"X_train shape: {str(X_train.shape)}")
+    print(f"Y_train shape: {str(Y_train.shape)}")
+    print(f"X_test shape: {str(X_test.shape)}")
+    print(f"Y_test shape: {str(Y_test.shape)}")
     image_x = 50
     image_y = 50
 
@@ -64,8 +64,8 @@ def main():
     test_y = test_y.reshape(test_y.shape[1], test_y.shape[2])
     X_train = X_train.reshape(X_train.shape[0], 50, 50, 1)
     X_test = X_test.reshape(X_test.shape[0], 50, 50, 1)
-    print("X_train shape: " + str(X_train.shape))
-    print("X_test shape: " + str(X_test.shape))
+    print(f"X_train shape: {str(X_train.shape)}")
+    print(f"X_test shape: {str(X_test.shape)}")
 
     model, callbacks_list = keras_model(image_x, image_y)
     model.fit(X_train, train_y, validation_data=(X_test, test_y), epochs=10, batch_size=64,
